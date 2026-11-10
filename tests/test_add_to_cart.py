@@ -1,7 +1,7 @@
 from pages.shop_page import ShopPage
 
 
-def test_recorded_add_to_cart_flow(driver):
+def test_add_to_cart_flow(driver):
     shop = ShopPage(driver)
     shop.open_first_image()
     shop.select_view_group()

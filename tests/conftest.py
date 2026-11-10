@@ -15,16 +15,19 @@ def driver():
         "appium:nativeWebScreenshot": True,
         "appium:newCommandTimeout": 3600,
         "appium:connectHardwareKeyboard": True,
+        "appium:noReset": True,
+        "appium:forceAppLaunch": True,
     }
-    # При необходимости явно укажите установленное приложение или путь к APK.
     for variable, capability in (
         ("APPIUM_APP", "appium:app"),
         ("APPIUM_APP_PACKAGE", "appium:appPackage"),
         ("APPIUM_APP_ACTIVITY", "appium:appActivity"),
-        ("APPIUM_UDID", "appium:udid"),
-    ):
+        ("APPIUM_UDID", "appium:udid"),):
         if value := os.getenv(variable):
             capabilities[capability] = value
+
+    if not os.getenv("APPIUM_APP") and not os.getenv("APPIUM_APP_PACKAGE"):
+        capabilities["appium:appPackage"] = "com.saucelabs.mydemoapp.rn"
 
     options = AppiumOptions().load_capabilities(capabilities)
     session = webdriver.Remote(os.getenv("APPIUM_URL", "http://127.0.0.1:4723"), options=options)
@@ -32,3 +35,9 @@ def driver():
         yield session
     finally:
         session.quit()
+
+@pytest.fixture
+def pages(driver):
+    from pages.page_factory import PageFactory
+
+    return PageFactory(driver)

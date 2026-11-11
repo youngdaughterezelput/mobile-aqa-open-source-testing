@@ -3,7 +3,6 @@ from appium.webdriver.common.appiumby import AppiumBy
 
 class ShopLocators:
     PRODUCTS_SCREEN = (AppiumBy.ACCESSIBILITY_ID, "products screen")
-    # Локаторы по instance зависят от структуры дерева и требуют замены.
     FIRST_IMAGE = (AppiumBy.ANDROID_UIAUTOMATOR,
                    'new UiSelector().className("android.widget.ImageView").instance(4)')
     VIEW_GROUP = (AppiumBy.ANDROID_UIAUTOMATOR,

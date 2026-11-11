@@ -1,4 +1,4 @@
-"""Upper panels on My Demo App."""
+"""Upper panels on My Demo App"""
 from selenium.webdriver.support import expected_conditions as EC
 
 from locators.header_locators import HeaderLocators
